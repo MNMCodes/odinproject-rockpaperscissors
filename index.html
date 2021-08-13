@@ -4,10 +4,44 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="resources/css/styles.css">
     <title>Rock Paper Scissors!</title>
 </head>
 <body>
-    <script>
+    
+    <header><h1>Rock Paper Scissors!</h1></header>
+    <main>
+        <button id="choose-rock"><img src="resources/images/rock.png" alt=""><p>Rock</p></button>
+        <button id="choose-paper"><img src="resources/images/paper.png" alt=""><p>Paper</p></button>
+        <button id="choose-scissors"><img src="resources/images/scissors.png" alt=""><p>Scissors</p></button>
+        
+        
+        <div id="display-area"><p></p></div>
+    </main>
+
+   <script>
+
+        //initialize counter to 1
+        //initialize playerscore to 0
+        //initialize computerscore to 0
+        //add event listener to buttons, onclick playround
+
+        //in playround
+        //get the choice id of the button the event was called on
+        //get the choice of the computer
+        //call compare choices, send player choice and computer choice, and store who won
+        //if player won, increment playerscore
+        //if computer won, increment computerscore
+        //post results to display-area div
+        //increment the counter
+
+        //if counter > 6 call declarewinner
+        //in declare winner compare playerscore and computer score
+        //initialize winningmessage to undefined
+        //if playerscore is greater, set winningmessage to a congrats
+        //if computerscore is greater, set winningmessage to computer won, try again
+        //if equal, set winning message to, you tied with the computer, try again?
+
         function getComputerPlay(){
             let choices = ["rock", "paper","scissors"];
             //get and store random number between 0 and length of choices -1
@@ -23,30 +57,18 @@
         }
 
         function capitalize(word){
-            //make word all lowercase
             let lowerCaseWord = word.toLowerCase();
 
-            //get and capitalize first letter
             let firstLetter = word[0].toUpperCase();
 
-            //store and add the rest of the original word to the capitalized letter string
             let restOfWord = lowerCaseWord.slice(1);
             let capitalizedWord = firstLetter.concat("",restOfWord);
             return capitalizedWord;
         }
         
         function declareOutcome(outcome, playerSelection, computerSelection){
-            //get whether player won or lost
-
-            //capitalize player and computer selection
             playerSelection = capitalize(playerSelection);
             computerSelection = capitalize(computerSelection);
-
-            //display message
-            //if loss You lost! computerselection beats playerSelection
-            //if tie It's a playerselection tie!
-            //if win You won! playerselection beats computer selection
-            //if fail display invalidity
 
             switch(outcome){
                 case "loss":
@@ -64,19 +86,9 @@
         }
 
         function checkRoundWin(playerSelection, computerSelection){
-            //make selections lowercase
+
             playerSelection = playerSelection.toLowerCase();
             computerSelection = computerSelection.toLowerCase();
-            //check selections against each other
-            //rock
-            //  if compsel is paper, loss
-            //  if compsel is scissors, win
-            //paper
-            //  if compsel is scissors, loss
-            //  if compsel is rock, win
-            //scissors
-            //  if compsel is rock, loss
-            //  if compsel is paper, win
 
             switch(playerSelection){
                 case "rock":{
@@ -115,29 +127,17 @@
         }
 
         function game(){
-
             let playerScore = 0;
             let computerScore = 0;
-
-            //5 times
             let roundNumber = 1;
 
             while(roundNumber < 6){
-                //get computer's decision
                 let computerChoice = getComputerPlay();
-
-                //prompt and store player's decision
                 let playerChoice = prompt("Rock, Paper or Scissors?")
 
-                //get the outcome
                 let resultForTheRound = checkRoundWin(playerChoice, computerChoice);
 
-                //display the result
                 console.log(declareOutcome(resultForTheRound, playerChoice, computerChoice));
-
-                //if win, increment player counter
-                //if loss, increment computer counter
-                //if tie, do nothing
 
                 switch(resultForTheRound){
                     case "win":
@@ -153,9 +153,6 @@
 
                 }
 
-                //if fail do nothing but display a message
-                //otherwise increment the roundNumber
-
                 if(resultForTheRound === "fail"){
                     let message = `Redoing round ${roundNumber}..`;
                     console.log(message);
@@ -164,7 +161,6 @@
                 }
             }
 
-            //announce ultimate winner
             let theWinner = getGameWinner(playerScore, computerScore);
             let resultMessage = announceGameWinner(theWinner);
             console.log(`Computer: ${computerScore} | Player: ${playerScore}`)
@@ -172,9 +168,6 @@
         }
 
         function getGameWinner(playerScore, computerScore){
-            //if playerscore is greater, return player
-            //if computerscore is greater, return computer
-            //if they are equal, return tie
 
             if(playerScore > computerScore){
                 return "player";
@@ -200,7 +193,6 @@
 
         }
 
-        game();
     </script>
 </body>
 </html>
